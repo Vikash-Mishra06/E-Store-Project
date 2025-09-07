@@ -16,7 +16,8 @@ const Navbar = () => {
                     </form>
                 </div>
                 <div className='flex items-center mr-4 text-xl'>
-                    <Link><FaShoppingCart /></Link>
+                <NavLink to={"/cart"} className={({ isActive }) => isActive ? "text-red-500 underline" : "hover:text-red-500 hover:underline"}><FaShoppingCart /></NavLink>
+
                 </div>
                 <button className='hidden md:block text-lg'>Login | Register</button>
                 <button className='block md:hidden text-lg'><FaUser /></button>

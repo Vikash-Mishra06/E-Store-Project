@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10 px-6 mt-10">
+    <footer className="bg-gray-900 text-gray-300 py-10 px-10 mt-10">
       <div className="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand */}
         <div>
@@ -37,10 +37,28 @@ const Footer = () => {
 
         {/* Newsletter */}
         <section>
+          <h3 className="text-lg font-semibold text-white">
+            Follow Us
+          </h3>
+          <div className="flex space-x-4 md:mt-0 text-xl mb-2">
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white">
+              <i className="ri-facebook-circle-fill"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-white">
+              <i className="ri-twitter-fill"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white">
+              <i className="ri-instagram-fill"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Github" className="hover:text-white">
+              <i className="ri-github-fill"></i>
+            </a>
+          </div>
+
           <h3 className="text-lg font-semibold text-white mb-3">
             Join Our Newsletter
           </h3>
-          <form className="flex flex-col sm:flex-row gap-2">
+          <form className="flex flex-col sm:flex-col gap-2">
             <input
               type="email"
               placeholder="Enter your email"
@@ -50,26 +68,15 @@ const Footer = () => {
               type="submit"
               className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700"
             >
-              Subscribe
+              Submit
             </button>
           </form>
         </section>
       </div>
 
       {/* Bottom Section */}
-      <div className="mt-10 border-t border-gray-700 pt-5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+      <div className="mt-10 border-t border-gray-700 pt-2 flex flex-col md:flex-row justify-between items-center text-lg text-gray-400 ">
         <p>&copy; 2025 e-Store. All rights reserved.</p>
-        <div className="flex space-x-4 mt-3 md:mt-0">
-          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-white">
-            Facebook
-          </a>
-          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-white">
-            Instagram
-          </a>
-          <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:text-white">
-            Twitter
-          </a>
-        </div>
       </div>
     </footer>
   );

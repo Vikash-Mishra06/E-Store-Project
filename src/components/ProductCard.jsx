@@ -3,8 +3,8 @@ import React from 'react'
 const ProductCard = ({product}) => {
   return (
     <div className='relative p-4 border rounded-xl shadow transform transition-transform duration-300 hover:scale-105 cursor-pointer bg-gray-100'>
-        <img className='w-full h-48 object-contain mb-4' src={product.image} alt="" />
-        <h2 className='text-xl font-semibold'>{product.title.slice(0, 20)}...</h2>
+        <img loading='lazy' className='w-full h-48 object-contain mb-4' src={product.image} alt="" />
+        <h2 className='text-xl font-semibold '>{product.title.slice(0, 20)}..</h2>
         <h3 className='text-lg'>{product.category}</h3>
         <p className='text-green-500 text-xl font-semibold'>Price: ${product.price}</p>
         <div className='absolute bottom-4 right-2 flex items-center justify-center text-center w-8 h-8 bg-red-500 group text-white text-sm rounded-full hover:w-25 hover:bg-red-600 transition-all'>

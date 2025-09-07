@@ -40,10 +40,19 @@ const Home = () => {
         <h1 className='text-4xl text-center font-bold mb-6 text-red-500'>Top Products</h1>
         <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5'>
           {products.products.slice(0, 5).map((product, index) => (
-            <ProductCard product={product}/>
+            <ProductCard key={index} product={product}/>
           ))}
         </div>
-      </div>
+          </div>
+
+      <div className='container mx-auto py-12 px-10'>
+        <h1 className='text-4xl text-center font-bold mb-6 text-red-500'>All Products</h1>
+        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5'>
+          {products.products.map((product, index) => (
+            <ProductCard key={index} product={product}/>
+          ))}
+        </div>
+        </div>
     </>
   )
 }
