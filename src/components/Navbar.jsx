@@ -1,8 +1,10 @@
 import React from 'react'
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 
 const Navbar = () => {
+    const products = useSelector(state => state.cart.products)
     return (
         <nav className='bg-white shadow-md'>
             <div className='container mx-auto py-4 px-4 md:px-16 lg:px-24 flex justify-between items-center'>
@@ -15,8 +17,12 @@ const Navbar = () => {
                         <FaSearch className='absolute top-3 right-6 text-red-500 text-lg'></FaSearch>
                     </form>
                 </div>
-                <div className='flex items-center mr-4 text-xl'>
-                <NavLink to={"/cart"} className={({ isActive }) => isActive ? "text-red-500 underline" : "hover:text-red-500 hover:underline"}><FaShoppingCart /></NavLink>
+                <div className=' flex items-center mr-4 text-xl'>
+                <NavLink to={"/cart"} className="relative"><FaShoppingCart />
+                    {products.length > 0 && (
+                        <span className='absolute -top-3 -right-2 text-xs font-semibold w-5 h-5 bg-red-500 rounded-full flex justify-center items-center text-white'>{products.length}</span>
+                    )}
+                </NavLink>
 
                 </div>
                 <button className='hidden md:block text-lg'>Login | Register</button>
@@ -25,7 +31,7 @@ const Navbar = () => {
             </div>
 
             <div className='hidden md:flex items-center justify-center gap-10 text-lg font-medium pb-2  '>
-                <NavLink to={"/home"} className={({ isActive }) => isActive ? "text-red-500 underline" : "hover:text-red-500 hover:underline"}>Home</NavLink>
+                <NavLink to={"/"} className={({ isActive }) => isActive ? "text-red-500 underline" : "hover:text-red-500 hover:underline"}>Home</NavLink>
                 <NavLink to={"/shop"} className={({ isActive }) => isActive ? "text-red-500 underline" : "hover:text-red-500 hover:underline"}>Shop</NavLink>
                 <NavLink to={"/contact"} className={({ isActive }) => isActive ? "text-red-500 underline" : "hover:text-red-500 hover:underline"}>Contact</NavLink>
                 <NavLink to={"/about"} className={({ isActive }) => isActive ? "text-red-500 underline" : "hover:text-red-500 hover:underline"}>About</NavLink>
