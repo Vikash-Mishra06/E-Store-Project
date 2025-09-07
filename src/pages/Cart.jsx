@@ -1,17 +1,21 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { decreaseQuantity, increaseQuantity, removeFromCart } from '../redux/cartSlice'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
-
-  const totalAmount = cart.products.reduce(
+  const products = Array.isArray(cart.products) ? cart.products : []
+  const totalAmount = products.reduce(
     (acc, product) => acc + product.price * product.quantity,
     0
   )
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   return (
     <div className="container mx-auto py-5 min-h-96 px-4 md:px-8 lg:px-16">
-      {cart.products.length > 0 ? (
+      {products.length > 0 ? (
         <div>
           <h1 className="text-3xl font-semibold text-red-500 mb-6 text-center md:text-left">
             Shopping Cart
@@ -30,8 +34,8 @@ const Cart = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 ">
-                {cart.products.map(product => (
+              <div className="flex flex-col gap-4">
+                {products.map(product => (
                   <div
                     key={product.id}
                     className="flex flex-col md:flex-row items-center justify-between gap-4 py-4 border-b last:border-0"
@@ -50,14 +54,14 @@ const Cart = () => {
 
                     {/* Controls */}
                     <div className="flex flex-wrap md:flex-nowrap md:space-x-0 items-center justify-between w-full md:w-auto text-sm md:text-base">
-                      <p className="w-20 text-center ">${product.price}</p>
+                      <p className="w-20 text-center">${product.price}</p>
 
                       <div className="flex items-center border rounded mx-2">
-                        <button className="text-lg font-bold px-2 border-r hover:bg-gray-100">
+                        <button onClick={() => dispatch(decreaseQuantity(product.id))} className="text-lg font-bold px-2 border-r hover:bg-gray-100">
                           -
                         </button>
                         <p className="text-lg px-3">{product.quantity}</p>
-                        <button className="text-lg px-2 border-l hover:bg-gray-100">
+                        <button onClick={() => dispatch(increaseQuantity(product.id))} className="text-lg px-2 border-l hover:bg-gray-100">
                           +
                         </button>
                       </div>
@@ -66,7 +70,10 @@ const Cart = () => {
                         ${(product.price * product.quantity).toFixed(2)}
                       </p>
 
-                      <button className="text-red-500 hover:text-red-600 hover:scale-110 transition-transform mx-auto md:mx-0">
+                      <button
+                        onClick={() => dispatch(removeFromCart(product.id))}
+                        className="text-red-500 hover:text-red-600 hover:scale-110 transition-transform mx-auto md:mx-0"
+                      >
                         <i className="ri-delete-bin-line text-2xl"></i>
                       </button>
                     </div>
@@ -94,14 +101,14 @@ const Cart = () => {
                 <span>Total</span>
                 <span>${totalAmount.toFixed(2)}</span>
               </div>
-              <button className="w-full mt-5 bg-red-500 text-white py-3 rounded-xl font-semibold hover:bg-red-600 transition">
+              <button onClick={() => navigate('/checkout')} className="w-full mt-5 bg-red-500 text-white py-3 rounded-xl font-semibold hover:bg-red-600 transition">
                 Proceed to Checkout
               </button>
             </div>
           </div>
         </div>
       ) : (
-        <h1 className="text-3xl md:text-4xl text-center text-gray-500 font-medium">
+        <h1 className="text-3xl md:text-4xl text-center text-red-500 font-medium">
           No Products Found
         </h1>
       )}

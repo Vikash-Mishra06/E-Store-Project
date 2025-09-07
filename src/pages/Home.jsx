@@ -6,10 +6,12 @@ import CategorySection from '../components/CategorySection'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProducts } from "./../redux/productSlice"
 import ProductCard from '../components/ProductCard'
+import { useNavigate } from 'react-router-dom'
 
 
 const Home = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const products = useSelector(state => state.product)
   useEffect(() => {
     dispatch(setProducts(mockData))
@@ -28,7 +30,7 @@ const Home = () => {
               ))}
             </ul>
           </div>
-          <div className='w-full md:w-7/12 mt-8 md:mt-0 h-96'>
+          <div onClick={() => navigate('/shop')} className='w-full md:w-7/12 mt-8 md:mt-0 h-96'>
             <img className='w-full h-full object-fit rounded' src={img1} alt="" />
           </div>
         </div>

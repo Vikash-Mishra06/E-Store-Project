@@ -7,6 +7,7 @@ import Contact from './pages/Contact'
 import Shop from './pages/Shop'
 import About from './pages/About'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
         <Route path='/contact' element={<Contact />}/>
         <Route path='/about' element={<About />}/>
         <Route path='/cart' element={<Cart />}/>
-
+        <Route path='/checkout' element={<Checkout />}/>
       </Routes>
       <Footer />
     </BrowserRouter>
