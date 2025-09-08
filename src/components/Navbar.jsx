@@ -1,10 +1,11 @@
 import React from 'react'
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const products = useSelector(state => state.cart.products)
+    const navigate = useNavigate()
     
     return (
         <nav className='bg-white shadow-md'>
@@ -26,7 +27,11 @@ const Navbar = () => {
                 </NavLink>
 
                 </div>
-                <button className='hidden md:block text-lg'>Login | Register</button>
+                <div className='flex cursor-pointer'>
+                    <span onClick={() => navigate('/login')} className='hidden md:block text-lg'>Login |</span>
+                    <span onClick={() => navigate('/register')} className='hidden md:block text-lg ml-1'> Register</span>
+                </div>
+                {/* <button  className='hidden md:block text-lg'>Login | Register</button> */}
                 <button className='block md:hidden text-lg'><FaUser /></button>
                 <button className='ml-4 lg:hidden md:hidden text-2xl'><i className="ri-menu-line"></i></button>
             </div>
