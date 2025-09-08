@@ -24,7 +24,7 @@ const Cart = () => {
 
           <div className="flex flex-col md:flex-row gap-6 mt-8">
             {/* Cart Products */}
-            <div className="md:w-2/3 bg-white rounded-2xl shadow p-4 overflow-x-auto border">
+            <div className="md:w-2/3 bg-white rounded-2xl shadow p-4 overflow-x-auto border border-gray-400">
               <div className="hidden md:flex justify-between border-b items-center mb-4 text-sm font-bold text-gray-600">
                 <p className="w-1/3">Products</p>
                 <div className="flex space-x-8 md:space-x-6 pb-2">
@@ -84,18 +84,18 @@ const Cart = () => {
             </div>
 
             {/* Cart Summary */}
-            <div className="md:w-1/3 bg-white rounded-2xl shadow p-5 h-fit">
+            <div className="md:w-1/3 bg-white rounded-2xl border border-gray-400 shadow p-5 h-fit">
               <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
               <div className="flex justify-between mb-2">
-                <span className="text-gray-600">Total Items:</span>
+                <span className="text-gray-600 font-medium">Total Items:</span>
                 <span className="font-medium">{ Number(cart.totalQuantity) || 0 }</span>
               </div>
               <div className="flex justify-between mb-2">
-                <span className="text-gray-600">Subtotal</span>
+                <span className="text-gray-600 font-medium">Subtotal</span>
                 <span className="font-medium">${ (totalAmount || 0).toFixed(2) }</span>
               </div>
               <div className="flex justify-between mb-2">
-                <span className="text-gray-600">Shipping</span>
+                <span className="text-gray-600 font-medium">Shipping</span>
                 <span className="font-medium">Free</span>
               </div>
               <div className="flex justify-between text-lg font-semibold border-t pt-3 mt-3">

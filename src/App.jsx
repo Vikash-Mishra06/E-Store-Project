@@ -8,6 +8,7 @@ import Shop from './pages/Shop'
 import About from './pages/About'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
+import OrderConfirmation from './pages/Order-Confirmation'
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path='/about' element={<About />}/>
         <Route path='/cart' element={<Cart />}/>
         <Route path='/checkout' element={<Checkout setOrder={setOrder}/>}/>
+        <Route path='/order-confirmation' element={<OrderConfirmation order={order}/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>

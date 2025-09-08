@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { FaAngleDown, FaAngleUp } from "react-icons/fa"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 const Accordion = ({ title, children }) => {
     const [open, setOpen] = useState(false)
@@ -27,6 +28,19 @@ const Checkout = ({setOrder}) => {
         city: '',
         zip: ''
     })
+
+    const navigate = useNavigate()
+
+    const handleOrder = () => {
+        const newOrder = {
+            products: cart.products,
+            orderNumber: "123456",
+            shippingInformation: shippingInfo,
+            totalPrice: cart.totalPrice
+        }
+        setOrder(newOrder)
+        navigate('/order-confirmation', { state: { order: newOrder } })
+    }
 
     return (
         <div className="container mx-auto py-5 min-h-96 px-4 md:px-8 lg:px-16">
@@ -136,7 +150,7 @@ const Checkout = ({setOrder}) => {
                 </div>
 
                 {/* Right: Order Summary */}
-                <div className="md:w-1/3 bg-white rounded-2xl shadow p-5 h-fit border">
+                <div className="md:w-1/3 bg-white rounded-2xl shadow p-5 h-fit border border-gray-400">
                     <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
                     <div className="space-y-3">
                         {cart.products.map((product) => (
@@ -147,7 +161,7 @@ const Checkout = ({setOrder}) => {
                                 <img src={product.image} alt="" className="w-12 h-12 object-contain" />
                                 <div className="flex-1 px-3">
                                     <h4 className="text-sm font-medium">{product.title}</h4>
-                                    <p className="text-xs text-gray-500">
+                                    <p className="text-sm font-medium text-gray-600">
                                         ${product.price} × {product.quantity}
                                     </p>
                                 </div>
@@ -163,7 +177,7 @@ const Checkout = ({setOrder}) => {
                         <span>${cart.totalPrice.toFixed(2)}</span>
                     </div>
 
-                    <button className="w-full mt-5 bg-red-500 text-white py-3 rounded-xl font-semibold hover:bg-red-600 transition">
+                    <button onClick={() => handleOrder()} className="w-full mt-5 bg-red-500 text-white py-3 rounded-xl font-semibold hover:bg-red-600 transition">
                         Place Order
                     </button>
                 </div>
