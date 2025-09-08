@@ -20,8 +20,13 @@ const Accordion = ({ title, children }) => {
     )
 }
 
-const Checkout = () => {
+const Checkout = ({setOrder}) => {
     const cart = useSelector(state => state.cart)
+    const [shippingInfo, setShippingInfo] = useState({
+        address: '',
+        city: '',
+        zip: ''
+    })
 
     return (
         <div className="container mx-auto py-5 min-h-96 px-4 md:px-8 lg:px-16">
@@ -71,6 +76,7 @@ const Checkout = () => {
                                 name="address"
                                 placeholder="Enter Address"
                                 className="w-full border border-gray-300 p-2 rounded outline-none"
+                                onChange={(e) => setShippingInfo({...shippingInfo, address: e.target.value})}
                             />
                         </div>
                         <div>
@@ -80,6 +86,7 @@ const Checkout = () => {
                                 name="city"
                                 placeholder="Enter City"
                                 className="w-full border border-gray-300 p-2 rounded outline-none"
+                                onChange={(e) => setShippingInfo({...shippingInfo, city: e.target.value})}
                             />
                         </div>
                         <div>
@@ -89,6 +96,7 @@ const Checkout = () => {
                                 name="postal"
                                 placeholder="Enter Postal Code"
                                 className="w-full border border-gray-300 p-2 rounded outline-none"
+                                onChange={(e) => setShippingInfo({...shippingInfo, zip: e.target.value})}
                             />
                         </div>
                     </Accordion>
@@ -150,7 +158,7 @@ const Checkout = () => {
                         ))}
                     </div>
 
-                    <div className="flex justify-between text-lg font-semibold border-t pt-3 mt-4">
+                    <div className="flex justify-between text-lg font-semibold  pt-3 mt-4">
                         <span>Total:</span>
                         <span>${cart.totalPrice.toFixed(2)}</span>
                     </div>

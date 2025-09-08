@@ -5,11 +5,12 @@ import { Link, NavLink } from 'react-router-dom'
 
 const Navbar = () => {
     const products = useSelector(state => state.cart.products)
+    
     return (
         <nav className='bg-white shadow-md'>
             <div className='container mx-auto py-4 px-4 md:px-16 lg:px-24 flex justify-between items-center'>
                 <div className='text-lg font-bold'>
-                    <Link >e-Store</Link>
+                    <Link to={'/'}>e-Store</Link>
                 </div>
                 <div className='relative flex-1 mx-4'>
                     <form>

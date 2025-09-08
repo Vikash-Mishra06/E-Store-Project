@@ -13,7 +13,7 @@ const cartSlice = createSlice({
     reducers: {
         addToCart(state, action) {
             const newItem = action.payload
-            const existingItem = state.products.find(item => item.id === newItem.id)
+            const existingItem = state.products.find((item) => item.id === newItem.id)
             if (existingItem) {
                 existingItem.quantity++
                 existingItem.totalPrice += newItem.price
@@ -36,7 +36,7 @@ const cartSlice = createSlice({
             if(findItem) {
                 state.totalPrice -= findItem.totalPrice
                 state.totalQuantity -= findItem.totalQuantity
-                state.products -= state.products.filter(item => item.id !== id)
+                state.products = state.products.filter(item => item.id !== id)
                 toast.error("Removed from Cart")
             }
         },

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -11,6 +11,7 @@ import Checkout from './pages/Checkout'
 
 
 const App = () => {
+  const [order, setOrder] = useState(null)
   return (
     <BrowserRouter>
     <Navbar />
@@ -20,7 +21,7 @@ const App = () => {
         <Route path='/contact' element={<Contact />}/>
         <Route path='/about' element={<About />}/>
         <Route path='/cart' element={<Cart />}/>
-        <Route path='/checkout' element={<Checkout />}/>
+        <Route path='/checkout' element={<Checkout setOrder={setOrder}/>}/>
       </Routes>
       <Footer />
     </BrowserRouter>
