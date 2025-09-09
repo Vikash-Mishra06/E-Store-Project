@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Modal from './Modal'
 import Login from '../components/Login'
 import Register from '../components/Register'
+import { setSearchTerm } from '../redux/productSlice'
 
 const Navbar = () => {
     const products = useSelector(state => state.cart.products)
     const navigate = useNavigate()
     const [isModelOpen, setisModelOpen] = useState(false)
     const [isLogin, setisLogin] = useState(true)
+    const [search, setsearch] = useState()
+    const dispatch = useDispatch()
 
-    // ✅ track logged in user
     const [currentUser, setCurrentUser] = useState(null)
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        dispatch(setSearchTerm(search))
+        navigate('/filtered-data')
+    }
 
     useEffect(() => {
         const updateUser = () => {
@@ -49,9 +57,11 @@ const Navbar = () => {
                 </div>
 
                 <div className='relative flex-1 mx-4'>
-                    <form>
-                        <input className='w-full border py-2 px-6 rounded' type="text" placeholder='Search' />
-                        <FaSearch className='absolute top-3 right-6 text-red-500 text-lg'></FaSearch>
+                    <form onSubmit={handleSearch}>
+                        <input className='w-full border py-2 px-6 rounded' type="text" placeholder='Search' 
+                            onChange={(e) => setsearch(e.target.value)}
+                        />
+                        <button className='absolute top-1 right-6 text-red-500 text-2xl font-medium'><i class="ri-search-line"></i></button>
                     </form>
                 </div>
 

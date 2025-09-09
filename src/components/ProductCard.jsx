@@ -3,6 +3,9 @@ import { addToCart } from '../redux/cartSlice'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
 
 const ProductCard = ({product}) => {
   const dispatch = useDispatch()
@@ -13,8 +16,29 @@ const ProductCard = ({product}) => {
     dispatch(addToCart(product))
     toast.success("Added to Cart")
   } 
+
+    gsap.registerPlugin(ScrollTrigger)
+
+  useGSAP(() => {
+    gsap.utils.toArray('.hero').forEach((el) => {
+      gsap.fromTo(el,
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 80%",   // start animating when image enters viewport
+            end: "top 30%",     // finish when scrolled further
+            scrub: true,        // tie animation to scroll
+          }
+        }
+      )
+    })
+  })
   return (
-    <div className='relative p-4 border rounded-xl shadow transform transition-transform duration-300 hover:scale-105 cursor-pointer bg-gray-100'>
+    <div className='hero relative p-4 border-3 border-gray-500 rounded-xl shadow-xl transform transition-transform duration-300 hover:scale-105 my-5 cursor-pointer bg-gray-100'>
         <img loading='lazy' className='w-full h-48 object-contain mb-4' src={product.image} alt="" />
         <h2 className='text-xl font-semibold '>{product.title.slice(0, 20)}..</h2>
         <h3 className='text-lg'>{product.category}</h3>

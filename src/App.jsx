@@ -11,6 +11,7 @@ import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/Order-Confirmation'
 import Login from './components/Login'
 import Register from './components/Register'
+import FilteredData from './pages/FilteredData'
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/order-confirmation' element={<OrderConfirmation order={order}/>}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/register' element={<Register />}/>
+        <Route path='/filtered-data' element={<FilteredData />}/>
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -5,6 +5,7 @@ import 'remixicon/fonts/remixicon.css'
 import store from "./redux/store.jsx"
 import { Provider } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
+import Lenis from 'lenis'
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>

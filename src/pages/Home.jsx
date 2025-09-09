@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setProducts } from "./../redux/productSlice"
 import ProductCard from '../components/ProductCard'
 import { useNavigate } from 'react-router-dom'
-
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination, Autoplay } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -40,21 +44,43 @@ const Home = () => {
 
       <div className='container mx-auto py-12 px-10'>
         <h1 className='text-4xl text-center font-bold mb-6 text-red-500'>Top Products</h1>
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5'>
-          {products.products.slice(0, 5).map((product, index) => (
-            <ProductCard key={index} product={product}/>
-          ))}
-        </div>
+        <Swiper
+          slidesPerView={4}
+          spaceBetween={20}
+          autoplay={{
+            delay: 2000, 
+            disableOnInteraction: false, // continue autoplay after user interaction
+            pauseOnMouseEnter: true, // pause when mouse hovers over slider
+          }}
+          modules={[Autoplay]}
+          navigation={{ nextEl: ".product-swiper-next", prevEl: ".product-swiper-prev" }}
+          breakpoints={{
+            1399: { slidesPerView: 4 },
+            1199: { slidesPerView: 3 },
+            991: { slidesPerView: 2 },
+            767: { slidesPerView: 1.5 },
+            0: { slidesPerView: 1 },
+          }}
+          className="mt-4 swiper position-relative"
+        >
+          <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 '>
+            {products.products.map((product, index) => (
+              <SwiperSlide key={index}>
+                <ProductCard product={product} />
+              </SwiperSlide>
+            ))}
           </div>
+        </Swiper>
+      </div>
 
       <div className='container mx-auto py-12 px-10'>
         <h1 className='text-4xl text-center font-bold mb-6 text-red-500'>All Products</h1>
-        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5'>
+        <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5'>
           {products.products.map((product, index) => (
-            <ProductCard key={index} product={product}/>
+            <ProductCard key={index} product={product} />
           ))}
         </div>
-        </div>
+      </div>
     </>
   )
 }
