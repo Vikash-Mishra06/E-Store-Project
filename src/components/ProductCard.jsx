@@ -4,6 +4,10 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger here too
+gsap.registerPlugin(ScrollTrigger);
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -16,31 +20,28 @@ const ProductCard = ({ product }) => {
     toast.success("Added to Cart");
   };
 
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        ".hero",
-        { scale: 0.8, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top 80%",
-            end: "top 30%",
-            scrub: true,
-          },
-        }
-      );
-    },
-    { scope: container }
-  );
+  useGSAP(() => {
+    gsap.fromTo(
+      container.current, // animate this specific card
+      { scale: 0.8, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: container.current, // trigger on this card
+          start: "top 80%",
+          end: "top 30%",
+          scrub: true,
+        },
+      }
+    );
+  }, { scope: container });
 
   return (
     <div
       ref={container}
-      className="hero relative p-4 border-3 border-gray-500 rounded-xl shadow-xl transform transition-transform duration-300 hover:scale-105 my-5 cursor-pointer bg-gray-100"
+      className="relative p-4 border-3 border-gray-500 rounded-xl shadow-xl transform transition-transform duration-300 hover:scale-105 my-5 cursor-pointer bg-gray-100"
     >
       <img
         loading="lazy"
@@ -48,9 +49,7 @@ const ProductCard = ({ product }) => {
         src={product.image}
         alt=""
       />
-      <h2 className="text-xl font-semibold">
-        {product.title.slice(0, 20)}..
-      </h2>
+      <h2 className="text-xl font-semibold">{product.title.slice(0, 20)}..</h2>
       <h3 className="text-lg">{product.category}</h3>
       <p className="text-green-500 text-xl font-semibold">
         Price: ${product.price}
