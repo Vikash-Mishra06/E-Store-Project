@@ -13,6 +13,10 @@ import Login from './components/Login'
 import Register from './components/Register'
 import FilteredData from './pages/FilteredData'
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const App = () => {
   const [order, setOrder] = useState(null)
